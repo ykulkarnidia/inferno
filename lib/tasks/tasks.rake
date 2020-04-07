@@ -77,6 +77,11 @@ def execute(instance, sequences)
       end
     end
     instance.save
+
+    # Fix to disable tls tests
+    disable_tls_tests = ENV['DISABLE_TLS_TESTS'] || false
+    sequence_instance = sequence.new(instance, client, disable_tls_tests)
+
     sequence_instance = sequence.new(instance, client, false)
     sequence_result = nil
 
